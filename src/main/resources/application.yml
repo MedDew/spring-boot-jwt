@@ -22,7 +22,15 @@ security:
   jwt:
     token:
       secret-key: secret-key
-      expire-length: 36000
+      #expire in milliseconds 3600000
+      expire-length: 3600000
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type: TRACE
       
 UserController:
   signin: Authenticates user and returns its JWT token.
