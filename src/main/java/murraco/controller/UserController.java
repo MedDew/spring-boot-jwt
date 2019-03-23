@@ -23,7 +23,9 @@ import murraco.dto.UserDataDTO;
 import murraco.dto.UserResponseDTO;
 import murraco.model.User;
 import murraco.service.UserService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 120)
 @RestController
 @RequestMapping("/users")
 @Api(tags = "users")
@@ -43,6 +45,7 @@ public class UserController {
   public String login(//
       @ApiParam("Username") @RequestParam String username, //
       @ApiParam("Password") @RequestParam String password) {
+      System.out.println("TOKEN VAL IN CONTROLLER : "+userService.signin(username, password));
     return userService.signin(username, password);
   }
 
