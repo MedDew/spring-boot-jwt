@@ -31,6 +31,7 @@ public class JwtAuthServiceApp implements CommandLineRunner {
 
   @Override
   public void run(String... params) throws Exception {
+    System.out.println("PARAMS : "+params);
     User admin = new User();
     admin.setUsername("admin");
     admin.setPassword("admin");
