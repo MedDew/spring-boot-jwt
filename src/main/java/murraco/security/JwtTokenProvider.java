@@ -22,6 +22,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.HashMap;
+import java.util.Map;
 import murraco.exception.CustomException;
 import murraco.model.Role;
 
@@ -44,6 +46,7 @@ public class JwtTokenProvider {
   @PostConstruct
   protected void init() {
     secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+      System.out.println("murraco.security.JwtTokenProvider.init() : "+secretKey);
   }
 
   public String createToken(String username, List<Role> roles) {
@@ -52,6 +55,10 @@ public class JwtTokenProvider {
     claims.put("auth", roles.stream().map(s -> new SimpleGrantedAuthority(s.getAuthority())).filter(Objects::nonNull).collect(Collectors.toList()));
 
     Date now = new Date();
+    
+    System.out.println("murraco.security.JwtTokenProvider.createToken() : "+ now.getTime());
+    System.out.println("murraco.security.JwtTokenProvider.createToken() : "+ System.currentTimeMillis());
+    System.out.println("murraco.security.JwtTokenProvider.createToken() : "+ validityInMilliseconds);
     Date validity = new Date(now.getTime() + validityInMilliseconds);
 
     return Jwts.builder()//
